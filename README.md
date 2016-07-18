@@ -1,6 +1,6 @@
 # StockVolatility
 This repo contains a RMarkdown file to analyze stock volatility. 
-The file will analyze the stock for AmerisourceBergen Company - stock symbol ABC.
+The file will analyze the stock for Johnson and Johnson - stock symbol JNJ.
 It will analyze starting from the year 2000.
 It will download the data, calculate the log returns, calculate volatility 
 measure, calculate volatility over the entire length of series for three different
