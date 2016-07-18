@@ -1,45 +1,39 @@
 # Analyzing Stock Volatility
 Johnny Quick  
-July 3, 2016  
+July 15, 2016  
 
-## Analyzing volatility of ABC stock 
-## AmerisourceBergen Company
+## Analyzing volatility of JNJ stock 
+## Johnson and Johnson
 
 
 ```r
 #uncomment install package if not installed
 #install.packages("tseries")
 library(tseries)
-```
 
-```
-## Warning: package 'tseries' was built under R version 3.3.1
-```
-
-```r
-# get data for AmerisourceBergen Company starting with year 2000
-ABCData <- get.hist.quote("abc", quote="Close", start = "2000-01-01")
+# get data for Johnson and Johnson starting with year 2000
+JNJData <- get.hist.quote("JNJ", quote="Close", start = "2000-01-01")
 ```
 
 ```
 ## time series starts 2000-01-03
-## time series ends   2016-07-01
+## time series ends   2016-07-15
 ```
 
 ```r
-ABCRet <- log(lag(ABCData)) - log(ABCData)
+JNJRet <- log(lag(JNJData)) - log(JNJData)
 
-# calculate volatility (standard deviation of ABCRet * sqrt(250) * 100)
+# calculate volatility (standard deviation of JNJRet * sqrt(250) * 100)
 ## 250 is used because that is the approximate number of days the stock market is open
 ## multiplied by 100 to get percentage
-ABCVol <- sd(ABCRet) * sqrt(250) * 100
+JNJVol <- sd(JNJRet) * sqrt(250) * 100
 
 # get volatility
-ABCVol
+JNJVol
 ```
 
 ```
-## [1] 38.52948
+## [1] 25.87466
 ```
 
 ```r
@@ -56,17 +50,14 @@ Vol <- function(d, logrets){
         sqrt(varlist)}
 
 # weight of .9
-volest <- Vol(10, ABCRet)
+volest <- Vol(10, JNJRet)
 # weight of .5
-volest2 <- Vol(50, ABCRet)
+volest2 <- Vol(50, JNJRet)
 # weight of .2
-volest3 <- Vol(80, ABCRet)
+volest3 <- Vol(80, JNJRet)
 ```
 
-Looking at the plot below, the volatility starts out a little high, is lower for
-many periods, then it spikes about 1600 periods in, goes back down, spikes
-again around 2400 periods in, and then goes back down and remains steady
-with low volatiility. As the weight goes down, the volatility follows.
+Looking at the plot below, the volatility starts out fairly low, then it spikes about 400 periods in, goes back down, goes slightly up again around 600 periods in, and then goes back down and remains steady with low volatiility until about 2200 periods in. Then, it goes back down and stays down. As the weight goes down, the volatility goes down as well.
 
 
 ```r
